@@ -1,0 +1,12 @@
+#!/bin/bash
+
+logger "conntrack clear for $1"
+if [ "$1" == "user1" ]
+then
+  conntrack -D -s <ip_address_for_user_1>
+elif [ "$1" == "user2" ]
+then
+  conntrack -D -s <ip_address_for_user_2>
+fi
+
+

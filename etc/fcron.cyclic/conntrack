@@ -1,0 +1,2 @@
+/usr/local/bin/drop_connections user1
+/usr/local/bin/drop_connections user2

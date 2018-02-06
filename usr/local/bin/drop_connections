@@ -1,0 +1,38 @@
+#!/bin/bash
+
+user1_mac=<user_1_mac_address>
+user2__mac=<user_2_mac_address>
+
+if [ "$1" == "user1" ]
+then
+  mac=$user1_mac
+elif 
+   [ "$1" == "user2" ]
+then
+  mac=$user2_mac
+else
+  echo "machine not known"
+  exit 2
+fi
+
+day=`date |cut -d' ' -f 1`
+hour=`date |tr -s ' ' |cut -d' ' -f 4 |cut -d':' -f 1`
+minute=`date |tr -s ' ' |cut -d' ' -f 4 |cut -d':' -f 2`
+
+rules=`iptables -L --line-numbers |grep -i ${mac} |grep ${day}`
+
+endtime=`echo ${rules} |tr -s ' ' |cut -d' ' -f 11`
+
+
+endhour=`echo ${endtime} |cut -d ':' -f 1`
+endmin=`echo ${endtime} |cut -d ':' -f 2`
+
+if [ "$hour" == "$endhour" ]
+then
+  if [ "$minute" -ge "$endmin" ]
+  then
+    logger "conntrack starting for $1"
+    /usr/local/bin/clear_conntrack $1
+  fi
+fi
+

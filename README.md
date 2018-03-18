@@ -1,5 +1,5 @@
 # ipfire_timed_access_enforcer
-IPFire Timed Access only affects new connections; this neatly deals with established connections
+IPFire Timed Access only affects new connections; this neatly deals with established connections.  See [my blog post for more details](https://www.ianbashford.net/post/ipfire_timed_access_enforcer/) 
 
 ## Overview
 IPFire timed access is useful for controlling childrens access to the internet.  Unfortunately this only affects new connections (due to the ACCEPT ESTABLISHED rule in the CONNTRACK chain being assessed first).
